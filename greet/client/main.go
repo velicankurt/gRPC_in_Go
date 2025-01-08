@@ -29,10 +29,20 @@ func main() {
 	c := pb.NewGreetServiceClient(conn)
 	//doGreet(c)
 	//doGreetManyTimes(c)
-	doLongGreet(c, []*pb.GreetRequest{
-		{FirstName: "Veli Can"},
+	//doLongGreet(c, []*pb.GreetRequest{
+	//	{FirstName: "Veli Can"},
+	//	{FirstName: "Veli"},
+	//	{FirstName: "Can"},
+	//})
+	doGreetEveryone(c, []*pb.GreetRequest{
 		{FirstName: "Veli"},
 		{FirstName: "Can"},
+		{FirstName: "Kurt"},
 	})
-	defer conn.Close()
+	defer func(conn *grpc.ClientConn) {
+		err = conn.Close()
+		if err != nil {
+			log.Fatalf("failed to close connection: %v", err)
+		}
+	}(conn)
 }
