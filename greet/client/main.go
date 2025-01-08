@@ -28,6 +28,11 @@ func main() {
 
 	c := pb.NewGreetServiceClient(conn)
 	//doGreet(c)
-	doGreetManyTimes(c)
+	//doGreetManyTimes(c)
+	doLongGreet(c, []*pb.GreetRequest{
+		{FirstName: "Veli Can"},
+		{FirstName: "Veli"},
+		{FirstName: "Can"},
+	})
 	defer conn.Close()
 }

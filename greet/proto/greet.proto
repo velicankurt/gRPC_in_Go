@@ -13,6 +13,7 @@ message GreetResponse {
 }
 
 service GreetService {
-  rpc Greet(GreetRequest) returns (GreetResponse) {}; // unary
-  rpc GreetManyTimes(GreetRequest) returns (stream GreetResponse) {}; // server streaming
+  rpc Greet(GreetRequest) returns (GreetResponse); // unary
+  rpc GreetManyTimes(GreetRequest) returns (stream GreetResponse); // server streaming
+  rpc LongGreet(stream GreetRequest) returns(GreetResponse); // client streaming
 }
