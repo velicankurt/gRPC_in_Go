@@ -28,11 +28,19 @@ func main() {
 	c := pb.NewCalculatorServiceClient(conn)
 	//doSum(c, 3, 10)
 	//doPrimes(c, 120)
-	doAvg(c, []*pb.AvgRequest{
+	//doAvg(c, []*pb.AvgRequest{
+	//	{Number: 1},
+	//	{Number: 2},
+	//	{Number: 3},
+	//	{Number: 4},
+	//})
+	doMax(c, []*pb.MaxRequest{
 		{Number: 1},
-		{Number: 2},
+		{Number: 5},
 		{Number: 3},
-		{Number: 4},
+		{Number: 6},
+		{Number: 2},
+		{Number: 20},
 	})
 	defer func(conn *grpc.ClientConn) {
 		err := conn.Close()
