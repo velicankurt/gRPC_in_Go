@@ -27,6 +27,17 @@ func main() {
 	}
 	c := pb.NewCalculatorServiceClient(conn)
 	//doSum(c, 3, 10)
-	doPrimes(c, 120)
-	defer conn.Close()
+	//doPrimes(c, 120)
+	doAvg(c, []*pb.AvgRequest{
+		{Number: 1},
+		{Number: 2},
+		{Number: 3},
+		{Number: 4},
+	})
+	defer func(conn *grpc.ClientConn) {
+		err := conn.Close()
+		if err != nil {
+			log.Fatalf("failed to close connection: %v", err)
+		}
+	}(conn)
 }
