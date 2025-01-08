@@ -8,10 +8,12 @@ import "sum.proto";
 import "primes.proto";
 import "avg.proto";
 import "max.proto";
+import "sqrt.proto";
 
 service CalculatorService {
   rpc Sum(SumRequest) returns (SumResponse); // unary
   rpc Primes(PrimesRequest) returns (stream PrimesResponse); // server streaming
   rpc Avg(stream AvgRequest) returns(AvgResponse); // client streaming
   rpc Max(stream MaxRequest) returns (stream MaxResponse); // bi-directinal streaming
+  rpc Sqrt(SqrtRequest) returns (SqrtResponse); // unary -> error handling example
 }

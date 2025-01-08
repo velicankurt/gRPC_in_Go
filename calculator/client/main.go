@@ -34,14 +34,15 @@ func main() {
 	//	{Number: 3},
 	//	{Number: 4},
 	//})
-	doMax(c, []*pb.MaxRequest{
-		{Number: 1},
-		{Number: 5},
-		{Number: 3},
-		{Number: 6},
-		{Number: 2},
-		{Number: 20},
-	})
+	//doMax(c, []*pb.MaxRequest{
+	//	{Number: 1},
+	//	{Number: 5},
+	//	{Number: 3},
+	//	{Number: 6},
+	//	{Number: 2},
+	//	{Number: 20},
+	//})
+	doSqrt(c, -10)
 	defer func(conn *grpc.ClientConn) {
 		err := conn.Close()
 		if err != nil {
