@@ -15,6 +15,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
+	"time"
 )
 
 var addr string = "localhost:50051"
@@ -34,11 +35,13 @@ func main() {
 	//	{FirstName: "Veli"},
 	//	{FirstName: "Can"},
 	//})
-	doGreetEveryone(c, []*pb.GreetRequest{
-		{FirstName: "Veli"},
-		{FirstName: "Can"},
-		{FirstName: "Kurt"},
-	})
+	//doGreetEveryone(c, []*pb.GreetRequest{
+	//	{FirstName: "Veli"},
+	//	{FirstName: "Can"},
+	//	{FirstName: "Kurt"},
+	//})
+	//doGreetWithDeadLine(c, 5*time.Second)
+	doGreetWithDeadLine(c, 1*time.Second)
 	defer func(conn *grpc.ClientConn) {
 		err = conn.Close()
 		if err != nil {
