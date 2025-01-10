@@ -13,6 +13,7 @@ package main
 import (
 	pb "github.com/velicankurt/gRPC_in_Go/greet/proto"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 	"log"
 	"net"
 )
@@ -32,7 +33,19 @@ func main() {
 
 	log.Printf("server listening at: %s\n", addr)
 
-	server := grpc.NewServer()
+	var options []grpc.ServerOption
+	tls := true // chenge to false if needed
+	if tls {
+		certFile := "ssl/server.crt"
+		keyFile := "ssl/server.pem"
+		creds, err := credentials.NewServerTLSFromFile(certFile, keyFile)
+		if err != nil {
+			log.Fatalf("failed to load certificates: %v", err)
+		}
+		options = append(options, grpc.Creds(creds))
+	}
+
+	server := grpc.NewServer(options...)             // ssl implementation
 	pb.RegisterGreetServiceServer(server, &Server{}) // To implement GreetServiceServer interface -> implement in the greet.go file
 	err = server.Serve(list)
 	if err != nil {
