@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package blog;
+
+option go_package = "github.com/velicankurt/gRPC_in_Go/blog/proto";
+
+import "google/protobuf/empty.proto";
+
+message Blog {
+  string id = 1;
+  string author_id = 2;
+  string title = 3;
+  string content = 4;
+}
+
+message BlogId {// We are using this wrapper message to return the id of the created blog (we cannot return a string directly)
+  string id = 1;
+}
+
+service BlogService {
+  rpc CreateBlog(Blog) returns (BlogId); // unary
+  rpc ReadBlog(BlogId) returns (Blog); // unary
+  rpc UpdateBlog(Blog) returns (google.protobuf.Empty); // unary
+  rpc DeleteBlog(BlogId) returns (google.protobuf.Empty); // unary
+  rpc ListBlogs(google.protobuf.Empty) returns (stream Blog); // server streaming
+}

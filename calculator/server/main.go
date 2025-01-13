@@ -13,6 +13,7 @@ package main
 import (
 	pb "github.com/velicankurt/gRPC_in_Go/calculator/proto"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
 )
@@ -36,6 +37,7 @@ func main() {
 
 	server := grpc.NewServer()
 	pb.RegisterCalculatorServiceServer(server, &Server{}) // To implement CalculatorServiceServer interface -> implement in the calculator.go file
+	reflection.Register(server)
 	err = server.Serve(list)
 	if err != nil {
 		log.Fatalf("failed to serve: %v", err)
